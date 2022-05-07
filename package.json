@@ -17,6 +17,12 @@
   },
   "homepage": "https://github.com/gzordrai/Natasha#readme",
   "dependencies": {
-    "npm": "^8.9.0"
+    "@discordjs/builders": "^0.13.0",
+    "@discordjs/rest": "^0.4.1",
+    "discord-api-types": "^0.32.1",
+    "discord.js": "^13.6.0",
+    "fs": "^0.0.1-security",
+    "npm": "^8.9.0",
+    "typescript": "^4.6.4"
   }
 }
