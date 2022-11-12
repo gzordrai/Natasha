@@ -12,7 +12,7 @@ interface ChannelRate {
     commun: Array<string>;
 }
 
-const channelNames: ChannelRate = {
+export const channelNames: ChannelRate = {
     legendary: ["La chambre de Natasha", "La camionette blanche"],
     epic: ["La cave de Simon", "La kouizine de Gilles", "La grenier de Thibaut", "Le marais de Maxime", "Le trône de Maxime"],
     rare: ["Black mesa", "Aperture laboratory", "La faille de l'invocateur", "Les backrooms", "L'antre des soupeurs"],
