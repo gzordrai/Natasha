@@ -1,20 +1,20 @@
-enum Rarety {
+export enum Rarety {
     Legendary = 1,
-    Epique = 10,
+    Epic = 10,
     Rare = 39,
     Commun = 50
 }
 
 interface ChannelRate {
     legendary: Array<string>;
-    epique: Array<string>;
+    epic: Array<string>;
     rare: Array<string>;
     commun: Array<string>;
 }
 
 const channelNames: ChannelRate = {
     legendary: ["La chambre de Natasha", "La camionette blanche"],
-    epique: ["La cave de Simon", "La kouizine de Gilles", "La grenier de Thibaut", "Le marais de Maxime", "Le trône de Maxime"],
+    epic: ["La cave de Simon", "La kouizine de Gilles", "La grenier de Thibaut", "Le marais de Maxime", "Le trône de Maxime"],
     rare: ["Black mesa", "Aperture laboratory", "La faille de l'invocateur", "Les backrooms", "L'antre des soupeurs"],
     commun: ["Vocal qui pu"]
 }
@@ -27,8 +27,8 @@ export const randomChannelName = async (): Promise<string> => {
         names = channelNames.commun;
     else if (roll >= Rarety.Rare && roll < (Rarety.Commun + Rarety.Rare))
         names = channelNames.rare;
-    else if (roll >= Rarety.Epique && roll < (Rarety.Commun + Rarety.Rare + Rarety.Epique))
-        names = channelNames.epique;
+    else if (roll >= Rarety.Epic && roll < (Rarety.Commun + Rarety.Rare + Rarety.Epic))
+        names = channelNames.epic;
     else if (roll >= Rarety.Legendary)
         names = channelNames.legendary;
 
