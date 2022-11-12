@@ -1,4 +1,4 @@
-import { GatewayIntentBits } from "discord.js";
+import { GatewayIntentBits, Partials } from "discord.js";
 import { config } from "dotenv";
 import { readdirSync } from "fs";
 import path from "path";
@@ -8,9 +8,12 @@ config({ path: path.join(__dirname, "../.env") });
 
 const client: ExtendedClient = new ExtendedClient({
     intents: [
-        GatewayIntentBits.Guilds
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildVoiceStates
     ],
-    partials: []
+    partials: [
+        Partials.Channel
+    ]
 });
 const commandsPath: string = path.join(__dirname, "commands");
 const eventsPath: string = path.join(__dirname, "events");
