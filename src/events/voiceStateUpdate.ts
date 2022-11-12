@@ -16,7 +16,7 @@ const event: IEvent = {
     async execute(client: ExtendedClient, oldState: VoiceState, newState: VoiceState): Promise<void> {
         // Voice connection
         if (oldState.channelId === null && newState.channelId === process.env.CHANNEL_CREATOR_ID) {
-            newState.guild.channels.create({
+            await newState.guild.channels.create({
                 name: channelNames[Math.floor(Math.random() * (channelNames.length - 0 + 1)) + 0],
                 type: ChannelType.GuildVoice
             }).then(async (channel: VoiceChannel) => {
@@ -25,7 +25,7 @@ const event: IEvent = {
             }).catch(console.error);
         } else if (newState.channelId === null) { // Voice disconnection
             if (oldState.channel!.members.size === 0)
-                oldState.channel!.delete();
+                await oldState.channel!.delete();
         }
     },
 };
