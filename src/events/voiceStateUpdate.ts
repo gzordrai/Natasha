@@ -1,14 +1,7 @@
 import { ChannelType, Events, VoiceChannel, VoiceState } from "discord.js";
+import { randomChannelName } from "../util/randomChannelName";
 import { ExtendedClient, IEvent } from "../bot";
 
-const channelNames: Array<string> = [
-    "La cave de Simon",
-    "La chambre de Natasha",
-    "La kouizine de Gilles",
-    "La grenier de Thibaut",
-    "Le marais de Maxime",
-    "Le trône de Maxime"
-];
 const event: IEvent = {
     name: Events.VoiceStateUpdate,
     once: false,
@@ -16,7 +9,7 @@ const event: IEvent = {
         // Voice connection
         if (newState.channelId === process.env.CHANNEL_CREATOR_ID) {
             await newState.guild.channels.create({
-                name: channelNames[Math.floor(Math.random() * (channelNames.length - 0 + 1)) + 0],
+                name: await randomChannelName(),
                 type: ChannelType.GuildVoice
             }).then(async (channel: VoiceChannel) => {
                 channel.setParent(newState.channel!.parentId);
