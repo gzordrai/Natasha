@@ -11,16 +11,17 @@ export const command: ICommand = {
         const user: User = await new User(interaction.user.id).sync();
         const cooldown: Cooldown = user.cooldowns.get("daily")!;
         const title: string = petals > 20 ? `Vous avez gagné ${petals} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)} !` : `Vous avez gagné ${petals} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)} (Cheh tu pu) !`;
-        const embed: EmbedBuilder = new EmbedBuilder()
-            .setTitle(title)
+        const embed: EmbedBuilder = new EmbedBuilder();
 
-        if (cooldown.isFinished()) {
-            user.balance.add(petals);
-            cooldown.reset();
-            await user.save();
+            if (cooldown.isFinished()) {
+                user.balance.add(petals);
+                cooldown.reset();
+                await user.save();
+                embed.setTitle(title);
+            } else
+                embed.setTitle(`Merci de patienter encore ${cooldown.getTimeLeft()} !`)
+    
             await interaction.followUp({ embeds: [embed] });
-        } else
-            await interaction.followUp({ content: `Merci de patienter encore ${cooldown.getTimeLeft()}` });
     }
 }
 
