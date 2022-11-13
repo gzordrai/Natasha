@@ -15,7 +15,8 @@ export class User {
             { 
                 balance: 100,
                 cooldowns: {
-                    daily: 0
+                    daily: 0,
+                    collect: 0
                 }
             },
             true
