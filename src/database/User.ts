@@ -23,6 +23,30 @@ export class User {
         );
     }
 
+    public async getAll(): Promise<Array<User>> {
+        const users: any = await Database.json.getData(`/users`);
+        const usersId: Array<string> = Object.keys(users);
+        let ret: Array<User> = new Array<User>();
+
+        for(const id of usersId) {
+            ret.push(await new User(id).sync());
+        }
+
+        ret.sort((a: User, b: User): number => {
+            if(a.balance.get() > b.balance.get())
+                return -1;
+            if(a.balance.get() < b.balance.get())
+                return 1;
+            return 0;
+        });
+
+        return ret;
+    }
+
+    public getId(): string {
+        return this.id;
+    }
+
     public async save(): Promise<void> {
         await Database.json.push(`/users/${this.id}/balance`, this.balance.get(), true);
         this.cooldowns.forEach(async (cooldown: Cooldown, key: string) => {
