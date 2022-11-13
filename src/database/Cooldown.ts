@@ -1,12 +1,10 @@
-export enum CooldownType {
-
-}
-
 export class Cooldown {
     private start: number;
+    private duration: number
 
-    public constructor(start: number) {
+    public constructor(start: number, duration: number) {
         this.start = start;
+        this.duration = duration;
     }
 
     /**
@@ -15,8 +13,8 @@ export class Cooldown {
      * @param x Cooldown time
      * @returns True if the cooldown is complete if not false
      */
-    public isFinished(x: CooldownType): boolean {
-        if (this.getSeconds() >= x)
+    public isFinished(): boolean {
+        if (this.getSeconds() >= this.duration)
             return true;
         return false;
     }
@@ -49,5 +47,22 @@ export class Cooldown {
         const seconds: number = Math.floor(millis / 1000);
 
         return seconds;
+    }
+
+    public getStart(): number {
+        return this.start;
+    }
+
+    public getTimeLeft(): string {
+        const timeLeft = this.duration - this.getSeconds();
+        const seconds = Math.floor(timeLeft % 60);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const hours = Math.floor((timeLeft % (3600 * 24)) / 3600);
+
+        return `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    public reset(): void {
+        this.start = Date.now();
     }
 }
