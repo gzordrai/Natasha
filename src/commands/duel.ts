@@ -69,8 +69,7 @@ export const command: ICommand = {
                                                                 m.reply({ content: "Pan ! Pan !\nDeux coup de feu ont retenti..." })
                                                                     .then(async () => {
                                                                         setTimeout(async () => {
-                                                                            if (userValue > opponentValue) {
-
+                                                                            if (userValue < opponentValue) {
                                                                                 user.balance.add(bet * 2);
 
                                                                                 await m.reply({ content: `${interaction.user} a gagné le duel en tirant en ${userValue} ms contre ce clochard de ${await interaction.guild?.members.fetch(opponent.getId())!} qui a tiré en ${opponentValue}ms !` })
@@ -78,10 +77,10 @@ export const command: ICommand = {
                                                                                         msg.reply({ content: `${interaction.user} vous avez gagné ${bet * 2} ${petalEmoji} !` })
                                                                                             .then(rich);
                                                                                     })
-                                                                            } else if (userValue < opponentValue) {
+                                                                            } else if (userValue > opponentValue) {
                                                                                 opponent.balance.add(bet * 2);
 
-                                                                                await m.reply({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} a gagné le duel en tirant en ${userValue} ms contre ce clochard de ${interaction.user} qui a tiré en ${opponentValue}ms !` })
+                                                                                await m.reply({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} a gagné le duel en tirant en ${opponentValue} ms contre ce clochard de ${interaction.user} qui a tiré en ${userValue}ms !` })
                                                                                     .then(async (msg: Message) => {
                                                                                         msg.reply({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} vous avez gagné ${bet * 2} ${petalEmoji} !` })
                                                                                             .then(rich);
