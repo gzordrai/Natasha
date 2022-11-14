@@ -21,8 +21,10 @@ export const command: ICommand = {
             .setTitle(`Porfil de ${interaction.user.username}`)
             .setThumbnail(interaction.user.displayAvatarURL())
             .addFields(
-                { name: "solde", value: `${user.balance.get()} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)}`},
-                { name: "cooldowns", value: cooldowns}
+                { name: "solde:", value: `${user.balance.get()} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)}`},
+                { name: "cooldowns:", value: cooldowns},
+                { name: "outils:", value: "work in progress... 👀" },
+                { name: "collection:", value: "work in progress... 👀" }
             )
 
         await interaction.followUp({ embeds: [embed] });
