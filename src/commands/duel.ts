@@ -52,7 +52,7 @@ export const command: ICommand = {
                         await interaction.followUp({ content: "Vous ou votre adversaire n'avez pas assez de pétales bande de clochard !" })
                             .then(poor);
                     } else {
-                        await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!}, ${interaction.user} vous provoque en duel pour ${bet} !\nAcceptez vous ?`, components: [row] })
+                        await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!}, ${interaction.user} vous provoque en duel pour ${bet} ${petalEmoji} !\nAcceptez vous ?`, components: [row] })
                             .then(async (message: Message) => {
                                 const filter = (interaction: any) => (interaction.customId === "duel-yes" || interaction.customId === "duel-no") && interaction.user.id === opponent.getId();
                                 message.awaitMessageComponent({ filter: filter, time: 20000 })
