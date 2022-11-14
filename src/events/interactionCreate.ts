@@ -10,7 +10,7 @@ const event: IEvent = {
             if (interaction.channelId === process.env.BOT_COMMAND_CHANNEL_ID! || interaction.user.id === process.env.OWNER_ID!)
                 await handleSlashCommand(client, interaction);
             else
-                await interaction.reply({ content: "Mauvais channel abruti !" });
+                await interaction.reply({ content: `Mauvais channel abruti ! (${await interaction.guild?.channels.fetch(process.env.BOT_COMMAND_CHANNEL_ID!)} 👀)` });
         }
     },
 };
