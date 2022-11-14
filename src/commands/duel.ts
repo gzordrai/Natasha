@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, GuildEmoji, Message, MessageComponentInteraction, SlashCommandBuilder } from "discord.js";
 import { User } from "../database";
 import { ExtendedClient, ICommand } from "../bot";
+import { duel, fool, loser, poor, rich, stupid } from "../util/duelAnswers";
 
 export const command: ICommand = {
     data: new SlashCommandBuilder()
@@ -37,71 +38,74 @@ export const command: ICommand = {
 
         if (interaction.options.getUser("adversaire")!.bot)
             await interaction.followUp({ content: "Vous pouvez pas jouer contre un bot idiot !" })
-                .then((message: Message) => {
-                    message.reply({ content: "https://tenor.com/view/debile-idiot-gif-15579739" });
-                })
+                .then(stupid);
         else {
             if (user.getId() === opponent.getId()) {
                 await interaction.followUp({ content: "Vous ne pouvez pas faire un duel contre vous même idiot !" })
-                    .then((message: Message) => {
-                        message.reply({ content: "https://tenor.com/view/debile-idiot-gif-15579739" });
-                    })
+                    .then(stupid);
             } else {
                 if (bet <= 0) {
                     await interaction.followUp({ content: "Mise invalide idiot !" })
-                        .then((message: Message) => {
-                            message.reply({ content: "https://tenor.com/view/debile-idiot-gif-15579739" });
-                        })
+                        .then(stupid);
                 } else {
                     if (!user.balance.has(bet) && !opponent.balance.has(bet)) {
                         await interaction.followUp({ content: "Vous ou votre adversaire n'avez pas assez de pétales bande de clochard !" })
-                            .then((message: Message) => {
-                                message.reply({ content: "https://tenor.com/view/squidward-spare-change-spare-some-change-begging-poor-gif-18999842" });
-                            })
+                            .then(poor);
                     } else {
-                        await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!}, ${interaction.user} vous provoque en duel !\nAcceptez vous ?`, components: [row] })
+                        await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!}, ${interaction.user} vous provoque en duel pour ${bet} !\nAcceptez vous ?`, components: [row] })
                             .then(async (message: Message) => {
                                 const filter = (interaction: any) => (interaction.customId === "duel-yes" || interaction.customId === "duel-no") && interaction.user.id === opponent.getId();
                                 message.awaitMessageComponent({ filter: filter, time: 20000 })
-                                    .then(async (i: unknown) => {
-                                        user.balance.add(-100);
-                                        opponent.balance.add(-100);
+                                    .then(async (i: any) => {
+                                        if (i.customId === "duel-yes") {
+                                            user.balance.add(-bet);
+                                            opponent.balance.add(-bet);
 
-                                        if (userValue > opponentValue) {
-                                            user.balance.add(bet * 2);
-
-                                            await interaction.followUp({ content: `${interaction.user} a gagné le duel contre ce clochard de ${await interaction.guild?.members.fetch(opponent.getId())!} !` })
-                                                .then((msg: Message) => {
-                                                    msg.reply({ content: `${interaction.user} vous avez gagné ${bet * 2} ${petalEmoji} !` })
+                                            await interaction.followUp({ content: "Le duel va commencer !" })
+                                                .then(async (msg: Message) => {
+                                                    duel(msg)
                                                         .then((m: Message) => {
-                                                            m.reply({ content: "https://tenor.com/view/hasbulla-money-gif-25191018" });
-                                                        })
-                                                })
-                                        } else if (userValue < opponentValue) {
-                                            opponent.balance.add(bet * 2);
+                                                            setTimeout(async () => {
+                                                                m.reply({ content: "Pan ! Pan !\nDeux coup de feu ont retenti..." })
+                                                                    .then(async () => {
+                                                                        setTimeout(async () => {
+                                                                            if (userValue > opponentValue) {
 
-                                            await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} a gagné le duel contre ce clochard de ${interaction.user} !` })
-                                                .then((msg: Message) => {
-                                                    msg.reply({ content: `${interaction.user} vous avez gagné ${bet * 2} ${petalEmoji} !` })
-                                                        .then((m: Message) => {
-                                                            m.reply({ content: "https://tenor.com/view/hasbulla-money-gif-25191018" });
+                                                                                user.balance.add(bet * 2);
+
+                                                                                await m.reply({ content: `${interaction.user} a gagné le duel contre ce clochard de ${await interaction.guild?.members.fetch(opponent.getId())!} !` })
+                                                                                    .then((msg: Message) => {
+                                                                                        msg.reply({ content: `${interaction.user} vous avez gagné ${bet * 2} ${petalEmoji} !` })
+                                                                                            .then(rich);
+                                                                                    })
+                                                                            } else if (userValue < opponentValue) {
+                                                                                opponent.balance.add(bet * 2);
+
+                                                                                await m.reply({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} a gagné le duel contre ce clochard de ${interaction.user} !` })
+                                                                                    .then((msg: Message) => {
+                                                                                        msg.reply({ content: `${interaction.user} vous avez gagné ${bet * 2} ${petalEmoji} !` })
+                                                                                            .then(rich);
+                                                                                    })
+                                                                            } else {
+                                                                                await m.reply({ content: `Ces abrutis se sont entre tuer... A moi la thune !` })
+                                                                                    .then(fool);
+                                                                            }
+
+                                                                            await user.save();
+                                                                            await opponent.save();
+                                                                        }, 2000);
+                                                                    });
+                                                            }, 2000);
                                                         })
                                                 })
                                         } else {
-                                            await interaction.followUp({ content: `Ces abrutis se sont entre tuer... A moi la thune !` })
-                                                .then((msg: Message) => {
-                                                    msg.reply({ content: "https://tenor.com/view/e-boy-gif-21631945" });
-                                                })
+                                            await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} à refusé le duel !` })
+                                                .then(loser);
                                         }
-
-                                        await user.save();
-                                        await opponent.save();
                                     })
                                     .catch(async () => {
-                                        await interaction.followUp({ content: `${interaction.guild?.members.fetch(opponent.getId())!} à refusé le duel !` })
-                                        .then((msg: Message) => {
-                                            msg.reply({ content: "https://tenor.com/view/boo-south-park-loser-you-suck-angry-gif-21522247" });
-                                        })
+                                        await interaction.followUp({ content: `${await interaction.guild?.members.fetch(opponent.getId())!} à refusé le duel !` })
+                                            .then(loser);
                                     })
                             })
                     }
