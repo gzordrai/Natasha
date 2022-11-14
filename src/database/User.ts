@@ -56,7 +56,7 @@ export class User {
 
     public async sync(): Promise<User> {
         if(!(await Database.json.exists(`/users/${this.id}`)))
-            this.register();
+            await this.register();
 
         const userCooldowns = await Database.json.getData(`/users/${this.id}/cooldowns`);
         const cooldownsName = Object.keys(userCooldowns);
