@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, GuildEmoji, Message, MessageComponentInteraction, SlashCommandBuilder } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, GuildEmoji, Message, SlashCommandBuilder } from "discord.js";
 import { User } from "../database";
 import { ExtendedClient, ICommand } from "../bot";
 import { duel, fool, loser, poor, rich, stupid } from "../util/duelAnswers";
