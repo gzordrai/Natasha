@@ -1,5 +1,5 @@
 import { Events, Interaction } from "discord.js";
-import { handleSlashCommand } from "../handlers";
+import { handleSelectMenu, handleSlashCommand } from "../handlers";
 import { ExtendedClient, IEvent } from "../bot";
 
 const event: IEvent = {
@@ -11,7 +11,8 @@ const event: IEvent = {
                 await handleSlashCommand(client, interaction);
             else
                 await interaction.reply({ content: `Mauvais channel abruti ! (${await interaction.guild?.channels.fetch(process.env.BOT_COMMAND_CHANNEL_ID!)} 👀)` });
-        }
+        } else if (interaction.isSelectMenu())
+            await handleSelectMenu(client, interaction);
     },
 };
 
