@@ -18,7 +18,7 @@ export const command: ICommand = {
                 cooldowns += cooldown.getTimeLeft() + '\n';
         });
         const embed: EmbedBuilder = new EmbedBuilder()
-            .setTitle(`Porfil de ${interaction.user.username}`)
+            .setTitle(`Profil de ${interaction.user.username}`)
             .setThumbnail(interaction.user.displayAvatarURL())
             .addFields(
                 { name: "solde:", value: `${user.balance.get()} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)}`},
