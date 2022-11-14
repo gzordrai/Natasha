@@ -48,7 +48,7 @@ export const command: ICommand = {
                     await interaction.followUp({ content: "Mise invalide idiot !" })
                         .then(stupid);
                 } else {
-                    if (!user.balance.has(bet) && !opponent.balance.has(bet)) {
+                    if (!user.balance.has(bet) || !opponent.balance.has(bet)) {
                         await interaction.followUp({ content: "Vous ou votre adversaire n'avez pas assez de pétales bande de clochard !" })
                             .then(poor);
                     } else {
