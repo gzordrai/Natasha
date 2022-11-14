@@ -1,4 +1,4 @@
-import { CommandInteraction, EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { channelNames, Rarety } from "../util";
 import { ExtendedClient, ICommand } from "../bot";
 
@@ -6,7 +6,7 @@ export const command: ICommand = {
     data: new SlashCommandBuilder()
         .setName("channels")
         .setDescription("Le taux de drop des noms de channel"),
-    async execute(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const legendaryNames: string = channelNames.legendary.toString().split(',').join("\n");
         const epicNames: string = channelNames.epic.toString().split(',').join("\n");
         const rareNames: string = channelNames.rare.toString().split(',').join("\n");

@@ -6,7 +6,7 @@ const event: IEvent = {
     name: Events.InteractionCreate,
     once: false,
     async execute(client: ExtendedClient, interaction: Interaction): Promise<void> {
-        if (interaction.isCommand()) {
+        if (interaction.isChatInputCommand()) {
             if (interaction.channelId === process.env.BOT_COMMAND_CHANNEL_ID! || interaction.user.id === process.env.OWNER_ID!)
                 await handleSlashCommand(client, interaction);
             else

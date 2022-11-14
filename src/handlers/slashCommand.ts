@@ -1,7 +1,7 @@
-import { CommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js";
 import { ExtendedClient, ICommand } from "../bot";
 
-export const handleSlashCommand = async (client: ExtendedClient, interaction: CommandInteraction): Promise<void> => {
+export const handleSlashCommand = async (client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> => {
     const command: ICommand = client.commands.get(interaction.commandName)!;
 
     try {

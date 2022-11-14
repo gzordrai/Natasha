@@ -1,4 +1,4 @@
-import { CommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { Cooldown, User } from "../database";
 import { ExtendedClient, ICommand } from "../bot";
 
@@ -6,7 +6,7 @@ export const command: ICommand = {
     data: new SlashCommandBuilder()
         .setName("profile")
         .setDescription("Votre profil"),
-    async execute(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const user: User = await new User(interaction.user.id).sync();
         let cooldowns = "";
         user.cooldowns.forEach((cooldown: Cooldown, key: string) => {

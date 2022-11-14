@@ -1,4 +1,4 @@
-import { AttachmentBuilder, CacheType, CommandInteraction, CommandInteractionOption, EmbedBuilder, SlashCommandBuilder, SlashCommandStringOption } from "discord.js";
+import { AttachmentBuilder, CacheType, ChatInputCommandInteraction, CommandInteractionOption, SlashCommandBuilder, SlashCommandStringOption } from "discord.js";
 import { readFileSync } from "fs";
 import path from "path";
 import { ExtendedClient, ICommand } from "../bot";
@@ -19,7 +19,7 @@ export const command: ICommand = {
                     { name: "Thedore", value: "theodore.gif" }
                 )
         ),
-    async execute(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const options: readonly CommandInteractionOption<CacheType>[] = interaction.options.data;
         const gifName: string = typeof options[0].value! === "string" ? options[0].value! : "";
         const gif: AttachmentBuilder = new AttachmentBuilder(readFileSync(path.join(__dirname, `../../resources/gif/${gifName}`)), { name: gifName });

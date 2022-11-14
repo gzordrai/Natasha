@@ -1,4 +1,4 @@
-import { Collection, CommandInteraction, EmbedBuilder, Guild, GuildEmoji, GuildMember, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, Collection, EmbedBuilder, GuildEmoji, GuildMember, SlashCommandBuilder } from "discord.js";
 import { User } from "../database";
 import { ExtendedClient, ICommand } from "../bot";
 
@@ -6,7 +6,7 @@ export const command: ICommand = {
     data: new SlashCommandBuilder()
         .setName("leaderboard")
         .setDescription("Le leaderboard du serveur"),
-    async execute(client: ExtendedClient, interaction: CommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const user: User = await new User(interaction.user.id).sync();
         const users: Array<User> = await user.getAll();
         const embed: EmbedBuilder = new EmbedBuilder()
