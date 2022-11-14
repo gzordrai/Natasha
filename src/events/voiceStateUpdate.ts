@@ -25,6 +25,7 @@ const event: IEvent = {
                     if(guildChannel.isTextBased()) {
                         guildChannel.send({ content: `${newState.member?.user} a eu un channel légendaire ! Il gagne donc 50 ${newState.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)!}` });
                         user.balance.add(50);
+                        await user.save();
                     }
                 }
             }).catch(console.error);
