@@ -98,8 +98,10 @@ export const command: ICommand = {
                                         await opponent.save();
                                     })
                                     .catch(async () => {
-                                        await interaction.followUp({ content: `${interaction.guild?.members.fetch(opponent.getId())!} à refusé le duel !` });
-                                        await interaction.followUp({ content: `https://tenor.com/view/boo-south-park-loser-you-suck-angry-gif-21522247` });
+                                        await interaction.followUp({ content: `${interaction.guild?.members.fetch(opponent.getId())!} à refusé le duel !` })
+                                        .then((msg: Message) => {
+                                            msg.reply({ content: "https://tenor.com/view/boo-south-park-loser-you-suck-angry-gif-21522247" });
+                                        })
                                     })
                             })
                     }
