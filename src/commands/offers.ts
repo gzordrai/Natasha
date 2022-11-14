@@ -5,7 +5,7 @@ import { ExtendedClient, ICommand } from "../bot";
 
 export const command: ICommand = {
     data: new SlashCommandBuilder()
-        .setName("offres")
+        .setName("offers")
         .setDescription("La liste des offres disponibles")
         .addStringOption((option: SlashCommandStringOption) =>
             option.setName("offre")
