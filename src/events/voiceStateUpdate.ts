@@ -1,4 +1,4 @@
-import { ChannelType, Events, GuildBasedChannel, GuildEmoji, VoiceChannel, VoiceState } from "discord.js";
+import { ChannelType, Events, GuildBasedChannel, VoiceChannel, VoiceState } from "discord.js";
 import { channelNames, randomChannelName } from "../util/randomChannelName";
 import { ExtendedClient, IEvent } from "../bot";
 import { User } from "../database";
