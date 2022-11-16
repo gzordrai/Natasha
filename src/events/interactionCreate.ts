@@ -1,8 +1,8 @@
 import { Events, Interaction } from "discord.js";
 import { handleSelectMenu, handleSlashCommand } from "../handlers";
-import { ExtendedClient, IEvent } from "../bot";
+import { ExtendedClient, Event } from "../bot";
 
-const event: IEvent = {
+const event: Event = {
     name: Events.InteractionCreate,
     once: false,
     async execute(client: ExtendedClient, interaction: Interaction): Promise<void> {

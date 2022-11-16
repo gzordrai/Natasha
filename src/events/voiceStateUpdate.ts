@@ -1,9 +1,9 @@
 import { ChannelType, Events, GuildBasedChannel, VoiceChannel, VoiceState } from "discord.js";
 import { channelNames, randomChannelName } from "../util/randomChannelName";
-import { ExtendedClient, IEvent } from "../bot";
+import { ExtendedClient, Event } from "../bot";
 import { User } from "../database";
 
-const event: IEvent = {
+const event: Event = {
     name: Events.VoiceStateUpdate,
     once: false,
     async execute(client: ExtendedClient, oldState: VoiceState, newState: VoiceState): Promise<void> {

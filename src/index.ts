@@ -2,7 +2,7 @@ import { GatewayIntentBits, Partials } from "discord.js";
 import { config } from "dotenv";
 import { readdirSync } from "fs";
 import path from "path";
-import { ExtendedClient, Command, IEvent } from "./bot";
+import { ExtendedClient, Command, Event } from "./bot";
 
 config({ path: path.join(__dirname, "../.env") });
 
@@ -29,7 +29,7 @@ for (const file of commandFiles) {
 
 for (const file of eventFiles) {
     const filePath: string = path.join(eventsPath, file);
-    const event: IEvent = require(filePath).default;
+    const event: Event = require(filePath).default;
 
     if (event.once)
         client.once(event.name, (...args) => event.execute(client, ...args));
