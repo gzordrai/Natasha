@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, EmbedBuilder, GuildEmoji, SlashCommandBuilder } from "discord.js";
-import { Cooldown, User } from "../database";
+import { User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 
 export const command: Command = {
