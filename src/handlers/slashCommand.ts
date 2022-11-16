@@ -20,8 +20,10 @@ export const handleSlashCommand = async (client: ExtendedClient, interaction: Ch
                 embed.setColor("Red");
 
                 await interaction.followUp({ embeds: [embed] });
-            } else
+            } else {
+                cooldown.reset();
                 await command.execute(client, interaction);
+            }
         } else
             await command.execute(client, interaction);
     } catch (error: unknown) {
