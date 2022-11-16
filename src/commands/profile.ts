@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
+import { ChatInputCommandInteraction, EmbedBuilder, GuildEmoji, SlashCommandBuilder } from "discord.js";
 import { Cooldown, User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 
@@ -8,24 +8,16 @@ export const command: Command = {
         .setDescription("Votre profil"),
     async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const user: User = await new User(interaction.user.id).sync();
-        let cooldowns = "";
-        user.cooldowns.forEach((cooldown: Cooldown, key: string) => {
-            cooldowns += `${key}: `;
+        const embed: EmbedBuilder = new EmbedBuilder();
+        const petalEmoji: GuildEmoji = interaction.guild!.emojis.cache.get(process.env.PETAL_EMOJI_ID!)!;
 
-            if(cooldown.isFinished())
-                cooldowns += "Ready !\n";
-            else
-                cooldowns += cooldown.getTimeLeft() + '\n';
-        });
-        const embed: EmbedBuilder = new EmbedBuilder()
-            .setTitle(`Profil de ${interaction.user.username}`)
-            .setThumbnail(interaction.user.displayAvatarURL())
-            .addFields(
-                { name: "solde:", value: `${user.balance.get()} ${interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)}`},
-                { name: "cooldowns:", value: cooldowns},
-                { name: "outils:", value: "work in progress... 👀" },
-                { name: "collection:", value: "work in progress... 👀" }
-            )
+        embed.setTitle(`Profil de ${interaction.user.username}`);
+        embed.setThumbnail(interaction.user.displayAvatarURL());
+        embed.addFields(
+            { name: "Solde:", value: `${user.balance.get()} ${petalEmoji}` },
+            { name: "Outils:", value: "work in progress... 👀" },
+            { name: "Collection:", value: "work in progress... 👀" }
+        );
 
         await interaction.followUp({ embeds: [embed] });
     }
