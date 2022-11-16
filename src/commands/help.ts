@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ChatInputCommandInteraction, SelectMenuBuilder, SelectMenuComponentOptionData, SlashCommandBuilder } from "discord.js";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("help")
         .setDescription("La liste des commandes"),
@@ -9,7 +9,7 @@ export const command: ICommand = {
         const row: ActionRowBuilder<SelectMenuBuilder> = new ActionRowBuilder<SelectMenuBuilder>();
         const commands: Array<SelectMenuComponentOptionData> = new Array<SelectMenuComponentOptionData>();
 
-        client.commands.forEach((command: ICommand, key: string) => {
+        client.commands.forEach((command: Command, key: string) => {
             commands.push({ label: command.data.name, description: command.data.description, value: command.data.name });
         });
 

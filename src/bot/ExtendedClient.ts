@@ -1,6 +1,6 @@
 import { Client, Collection } from "discord.js";
-import { ICommand } from ".";
+import { Command } from ".";
 
 export class ExtendedClient extends Client {
-    public commands: Collection<string, ICommand> = new Collection<string, ICommand>;
+    public commands: Collection<string, Command> = new Collection<string, Command>;
 }

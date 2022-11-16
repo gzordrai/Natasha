@@ -1,11 +1,12 @@
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { Cooldown, User } from "../database";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("daily")
         .setDescription("Vous permet de récuperer entre 1 et 200 pétales par jour (cd 24h)"),
+    cooldown: 86400,
     async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
         const petals: number = Math.floor(Math.random() * 200);
         const user: User = await new User(interaction.user.id).sync();

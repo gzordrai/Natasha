@@ -1,5 +1,5 @@
 import { EmbedBuilder, Message, SelectMenuInteraction } from "discord.js";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
 export const handleSelectMenu = async (client: ExtendedClient, interaction: SelectMenuInteraction): Promise<void> => {
     await interaction.deferReply();
@@ -10,7 +10,7 @@ export const handleSelectMenu = async (client: ExtendedClient, interaction: Sele
 }
 
 const helpSelectMenu = async (client: ExtendedClient, interaction: SelectMenuInteraction): Promise<void> => {
-    const command: ICommand = client.commands.get(interaction.values[0])!;
+    const command: Command = client.commands.get(interaction.values[0])!;
     const embed: EmbedBuilder = new EmbedBuilder()
         .setTitle(interaction.values[0])
         .setDescription(command.data.description);

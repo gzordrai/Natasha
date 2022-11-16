@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, Collection, EmbedBuilder, GuildEmoji, GuildMember, SlashCommandBuilder } from "discord.js";
 import { User } from "../database";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("leaderboard")
         .setDescription("Le leaderboard du serveur"),

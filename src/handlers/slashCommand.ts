@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction } from "discord.js";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
 export const handleSlashCommand = async (client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> => {
-    const command: ICommand = client.commands.get(interaction.commandName)!;
+    const command: Command = client.commands.get(interaction.commandName)!;
 
     try {
         await interaction.deferReply();

@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { Cooldown, User } from "../database";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("profile")
         .setDescription("Votre profil"),

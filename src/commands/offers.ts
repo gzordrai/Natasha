@@ -1,9 +1,9 @@
 import { AttachmentBuilder, ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandStringOption } from "discord.js";
 import { readFileSync } from "fs";
 import path from "path";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("offers")
         .setDescription("La liste des offres disponibles")

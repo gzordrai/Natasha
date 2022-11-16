@@ -1,9 +1,9 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, GuildEmoji, Message, SlashCommandBuilder } from "discord.js";
 import { User } from "../database";
-import { ExtendedClient, ICommand } from "../bot";
+import { ExtendedClient, Command } from "../bot";
 import { duel, fool, loser, poor, rich, stupid } from "../util/duelAnswers";
 
-export const command: ICommand = {
+export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("duel")
         .setDescription("Faire un duel contre un adversaire !")
