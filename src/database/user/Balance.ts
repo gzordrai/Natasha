@@ -5,16 +5,29 @@ export class Balance {
         this.amount = amount;
     }
 
+    /**
+     * 
+     * @param x 
+     */
     public add(x: number): void {
         this.amount += x;
     }
 
+    /**
+     * 
+     * @param x 
+     * @returns 
+     */
     public has(x: number): boolean {
         if (this.amount >= x)
             return true;
         return false;
     }
 
+    /**
+     * 
+     * @returns 
+     */
     public get(): number {
         return this.amount;
     }
