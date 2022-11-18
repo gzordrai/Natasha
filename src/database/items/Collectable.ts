@@ -1,4 +1,4 @@
-import { Item } from ".";
+import { Item } from "./Item";
 import { JSONCollectable } from "../JSON";
 
 export class Collectable extends Item {

@@ -1,4 +1,4 @@
-import { Item } from ".";
+import { Item } from "./Item";
 import { JSONTool } from "../JSON";
 
 export class Tool extends Item {
