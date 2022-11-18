@@ -1,7 +1,20 @@
 import { Collection } from "discord.js";
-import { Collectable, Tool } from "../items";
+import { Collectable, Item, Tool } from "../items";
 
-export interface Inventory {
-    collectables: Collection<string, Collectable>;
-    tools: Collection<string, Tool>;
+export class Inventory {
+    private collectables: Collection<string, Collectable>;
+    private tools: Collection<string, Tool>;
+
+    public constructor(collectables: Collection<string, Tool> = new Collection<string, Tool>(), tools: Collection<string, Tool> = new Collection<string, Tool>()) {
+        this.collectables = collectables;
+        this.tools = tools;
+    }
+
+    public getCollectables(): Collection<string, Collectable> {
+        return this.collectables;
+    }
+
+    public getTools(): Collection<string, Item> {
+        return this.tools;
+    }
 }
