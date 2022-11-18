@@ -1,5 +1,5 @@
 import { Collection } from "discord.js";
-import { Balance, Cooldown, Database, Inventory, Collectable, Tool } from "../";
+import { Balance, Cooldown, Inventory } from "../";
 import { JSONCooldown, JSONUser } from "../JSON";
 
 export class User {
