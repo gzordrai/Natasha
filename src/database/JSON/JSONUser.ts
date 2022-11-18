@@ -1,7 +1,7 @@
-import { JSONInventory } from ".";
+import { JSONCooldown, JSONInventory } from ".";
 
 export interface JSONUser {
     balance: number;
-    cooldowns: {}
+    cooldowns: JSONCooldown;
     inventory: JSONInventory;
 }
