@@ -1,8 +1,19 @@
 export class Cooldown {
+    private name: string;
     private start: number;
 
-    public constructor(start: number) {
+    public constructor(name: string, start: number) {
+        this.name = name;
         this.start = start;
+    }
+
+    /**
+     * The cooldown name
+     * 
+     * @returns cooldown name
+     */
+    public getName(): string {
+        return this.name;
     }
 
     /**
