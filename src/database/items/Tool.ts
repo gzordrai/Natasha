@@ -1,4 +1,5 @@
-import { Item } from "./Item";
+import { Item } from ".";
+import { JSONTool } from "../JSON";
 
 export class Tool extends Item {
     private breakRate: number;
@@ -26,7 +27,7 @@ export class Tool extends Item {
      * 
      * @returns class data
      */
-    public toJSON(): any {
+    public toJSON(): JSONTool {
         return { name: this.name, price: this.price, copy: this.copy, breakRate: this.breakRate };
     }
 }

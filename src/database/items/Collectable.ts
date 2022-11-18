@@ -1,4 +1,5 @@
-import { Item } from "./Item";
+import { Item } from ".";
+import { JSONCollectable } from "../JSON";
 
 export class Collectable extends Item {
     public constructor(name: string, price: number, copy?: number) {
@@ -10,7 +11,7 @@ export class Collectable extends Item {
      * 
      * @returns class data
      */
-    public toJSON(): any {
+    public toJSON(): JSONCollectable {
         return { name: this.name, price: this.price, copy: this.copy };
     }
 }
