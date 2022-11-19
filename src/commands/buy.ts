@@ -41,7 +41,7 @@ export const command: Command = {
                 )
         ),
     async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
-        const user: User = await new User(interaction.user.id).sync();
+        // const user: User = await new User(interaction.user.id).sync();
 
         await interaction.followUp({});
     }

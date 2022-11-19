@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, GuildEmoji, Message, SlashCommandBuilder } from "discord.js";
-import { User } from "../database";
+import { Database, User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 import { duel, fool, loser, poor, rich, stupid } from "../util/duelAnswers";
 
@@ -17,9 +17,9 @@ export const command: Command = {
                 .setDescription("La mise du duel")
                 .setRequired(true)
         ),
-    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
-        const user: User = await new User(interaction.user.id).sync();
-        const opponent: User = await new User(interaction.options.getUser("adversaire")!.id).sync();
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction, user: User): Promise<void> {
+        const opponentId: string = interaction.options.getUser("adversaire")!.id;
+        const opponent: User = await Database.has(opponentId) ? await Database.getUser(opponentId) : await Database.addUser(opponentId);
         const bet: number = interaction.options.getInteger("mise")!;
         const userValue: number = Math.floor(Math.random() * (21 - 0) + 0); // [0, 20]
         const opponentValue: number = Math.floor(Math.random() * (21 - 0) + 0); // [0, 20]
@@ -90,8 +90,8 @@ export const command: Command = {
                                                                                     .then(fool);
                                                                             }
 
-                                                                            await user.save();
-                                                                            await opponent.save();
+                                                                            await Database.save(user);
+                                                                            await Database.save(opponent);
                                                                         }, 2000);
                                                                     });
                                                             }, 2000);

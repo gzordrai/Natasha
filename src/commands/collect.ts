@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, EmbedBuilder, GuildEmoji, SlashCommandBuilder } from "discord.js";
-import { User } from "../database";
+import { Database, User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 
 export const command: Command = {
@@ -7,14 +7,13 @@ export const command: Command = {
         .setName("collect")
         .setDescription("Vous permet de récuperer entre 1 et 20 pétales (cd 2h)"),
     cooldown: 7200,
-    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
-        const user: User = await new User(interaction.user.id).sync();
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction, user: User): Promise<void> {
         const petals: number = Math.floor(Math.random() * 20);
         const petalEmoji: GuildEmoji = interaction.guild!.emojis.cache.get(process.env.PETAL_EMOJI_ID!)!;
         const embed: EmbedBuilder = new EmbedBuilder();
 
         user.balance.add(petals);
-        await user.save();
+        await Database.save(user);
 
         embed.setTitle(`Vous avez gagné ${petals} ${petalEmoji} !`);
 

@@ -1,6 +1,7 @@
 import { AttachmentBuilder, ChatInputCommandInteraction, SlashCommandBuilder, SlashCommandStringOption } from "discord.js";
 import { readFileSync } from "fs";
 import path from "path";
+import { User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 
 export const command: Command = {
@@ -19,7 +20,7 @@ export const command: Command = {
                     { name: "Thedore", value: "theodore.gif" }
                 )
         ),
-    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction, user: User): Promise<void> {
         const gifName: string = interaction.options.getString("offre")!;
         const gif: AttachmentBuilder = new AttachmentBuilder(readFileSync(path.join(__dirname, `../../resources/gif/${gifName}`)), { name: gifName });
         let question: string = "Would you buy my ";

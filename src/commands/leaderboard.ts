@@ -6,7 +6,7 @@ export const command: Command = {
     data: new SlashCommandBuilder()
         .setName("leaderboard")
         .setDescription("Le leaderboard du serveur"),
-    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> {
+    async execute(client: ExtendedClient, interaction: ChatInputCommandInteraction, user: User): Promise<void> {
         const users: Array<User> = await Database.getAllUsers();
         const embed: EmbedBuilder = new EmbedBuilder();
         const petalEmoji: GuildEmoji = interaction.guild?.emojis.cache.get(process.env.PETAL_EMOJI_ID!)!;
@@ -19,11 +19,11 @@ export const command: Command = {
         const guildMembers: Collection<string, GuildMember> = await interaction.guild!.members.fetch({ user: usersId });
 
         for (let i = 0; i < users.length; i++)
-            description += `${i} - ${guildMembers.get(users[i].getId())!.user.username}: ${users[i].balance.get()} ${petalEmoji}\n`;
+            description += `${i + 1} - ${guildMembers.get(users[i].getId())!.user.username}: ${users[i].balance.get()} ${petalEmoji}\n`;
 
         embed.setTitle("Leaderboard");
         embed.setDescription(description);
-        embed.setThumbnail(client.user!.displayAvatarURL());
+        embed.setColor("Blue");
 
         await interaction.followUp({ embeds: [embed] });
     }
