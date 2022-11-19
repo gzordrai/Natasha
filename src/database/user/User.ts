@@ -36,8 +36,6 @@ export class User {
         for(const cooldown of this.cooldowns.values())
             cooldowns[cooldown.getName()] = cooldown.getStart();
 
-        console.log(cooldowns);
-
         return { balance: balance, cooldowns: cooldowns, inventory: this.inventory.toJSON() };
     }
 }
