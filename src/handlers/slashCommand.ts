@@ -1,8 +1,8 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js";
-import { Cooldown, User } from "../database";
+import { Cooldown, Database, User } from "../database";
 import { ExtendedClient, Command } from "../bot";
 
-export const handleSlashCommand = async (client: ExtendedClient, interaction: ChatInputCommandInteraction): Promise<void> => {
+export const handleSlashCommand = async (client: ExtendedClient, interaction: ChatInputCommandInteraction, user: User): Promise<void> => {
     const commandName: string = interaction.commandName;
     const command: Command = client.commands.get(commandName)!;
 
@@ -10,7 +10,6 @@ export const handleSlashCommand = async (client: ExtendedClient, interaction: Ch
         await interaction.deferReply();
 
         if (command.cooldown) {
-            const user: User = await new User(interaction.user.id).sync();
             const cooldown: Cooldown = user.cooldowns.get(commandName)!;
 
             if (!cooldown.isFinished(command.cooldown)) {
@@ -22,10 +21,10 @@ export const handleSlashCommand = async (client: ExtendedClient, interaction: Ch
                 await interaction.followUp({ embeds: [embed] });
             } else {
                 cooldown.reset();
-                await command.execute(client, interaction);
+                await command.execute(client, interaction, user);
             }
         } else
-            await command.execute(client, interaction);
+            await command.execute(client, interaction, user);
     } catch (error: unknown) {
         console.log(error);
         await interaction.reply({ content: "Une erreur inattendue s'est produite lors de l'éxecution de la commande !", ephemeral: true });
