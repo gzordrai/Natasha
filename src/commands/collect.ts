@@ -16,6 +16,7 @@ export const command: Command = {
         await Database.save(user);
 
         embed.setTitle(`Vous avez gagné ${petals} ${petalEmoji} !`);
+        embed.setColor("Blue");
 
         await interaction.followUp({ embeds: [embed] });
     }
