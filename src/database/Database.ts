@@ -7,7 +7,7 @@ import { JSONUser } from "./JSON";
 
 export class Database {
     private static readonly items: JsonDB  = new JsonDB(new Config(path.resolve(__dirname, "../../data/items.json"), true, true, '/'));
-    private static readonly users: JsonDB  = new JsonDB(new Config(path.resolve(__dirname, "../../data/test.json"), true, true, '/')); // ../../data/users.json
+    private static readonly users: JsonDB  = new JsonDB(new Config(path.resolve(__dirname, "../../data/users.json"), true, true, '/'));
 
     /**
      * Add a user to the database
