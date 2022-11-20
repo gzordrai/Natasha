@@ -92,7 +92,7 @@ export class Database {
             inventory.addCollectable(new Collectable(collectable.name, collectable.price, collectable.copy));
 
         for(const tool of data.inventory.tools)
-            inventory.addTool(new Tool(tool.name, tool.price, tool.copy, tool.breakRate));
+            inventory.addTool(new Tool(tool.name, tool.price, tool.breakRate, tool.copy));
 
         return new User(id, balance, cooldowns, inventory);
     }
