@@ -13,13 +13,13 @@ export const command: Command = {
         let collectables: string = "- ";
 
         user.inventory.getTools().forEach((tool: Tool) => {
-            const emoji: GuildEmoji = interaction.guild?.emojis.cache.get(process.env[`${tool.getName()}_EMOJI_ID`]!)!;
+            const emoji: GuildEmoji = interaction.guild?.emojis.cache.get(process.env[`${tool.getName().toUpperCase()}_EMOJI_ID`]!)!;
 
             tools += `x${tool.getCopies()} ${emoji}\n`;
         });
 
         user.inventory.getCollectables().forEach((collectable: Collectable) => {
-            const emoji: GuildEmoji = interaction.guild?.emojis.cache.get(process.env[`${collectable.getName()}_EMOJI_ID`]!)!;
+            const emoji: GuildEmoji = interaction.guild?.emojis.cache.get(process.env[`${collectable.getName().toUpperCase()}_EMOJI_ID`]!)!;
 
             collectables += `x${collectable.getCopies()} ${emoji}\n`;
         });
