@@ -3,10 +3,10 @@ export abstract class Item {
     protected price: number;
     protected copy: number;
 
-    public constructor(name: string, price: number, copy?: number) {
+    public constructor(name: string, price: number, copy: number = 0) {
         this.name = name;
         this.price = price;
-        this.copy = copy ? copy : 1;
+        this.copy = copy;
     }
 
     /**
