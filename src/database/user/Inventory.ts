@@ -17,7 +17,13 @@ export class Inventory {
      * @param collectable collectable item to be added
      */
     public addCollectable(collectable: Collectable): void {
-        this.collectables.set(collectable.getName(), collectable);
+        if (this.collectables.has(collectable.getName())) {
+            const oldCollectable: Collectable = this.collectables.get(collectable.getName())!;
+            const newCollectable: Collectable = new Collectable(collectable.getName(), collectable.getPrice(), collectable.getCopies() + oldCollectable.getCopies());
+
+            this.collectables.set(collectable.getName(), newCollectable);
+        } else
+            this.collectables.set(collectable.getName(), collectable);
     }
 
     /**
@@ -26,7 +32,13 @@ export class Inventory {
      * @param tool tool to be added
      */
     public addTool(tool: Tool): void {
-        this.tools.set(tool.getName(), tool);
+        if (this.tools.has(tool.getName())) {
+            const oldTool: Tool = this.tools.get(tool.getName())!;
+            const newTool: Tool = new Tool(tool.getName(), tool.getPrice(), tool.getBreakRate(), tool.getCopies() + oldTool.getCopies());
+
+            this.tools.set(tool.getName(), newTool);
+        } else
+            this.tools.set(tool.getName(), tool);
     }
 
     /**
