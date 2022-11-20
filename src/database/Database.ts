@@ -30,6 +30,25 @@ export class Database {
     }
 
     /**
+     * All tools form the database
+     * 
+     * @returns all database tools
+     */
+    public static async getAllTools(): Promise<Array<Tool>> {
+        const data: any = await Database.items.getData("/tools");
+        const keys: Array<string> = Object.keys(data);
+        let tools: Array<Tool> = new Array<Tool>();
+
+        for(let i = 0; i < keys.length; i++) {
+            const tool: any = data[keys[i]];
+
+            tools.push(new Tool(tool.name, tool.price, tool.breakRate));
+        }
+
+        return tools;
+    }
+
+    /**
      * All database users sorted by their balance
      * 
      * @returns all database users
