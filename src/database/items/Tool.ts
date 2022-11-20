@@ -10,6 +10,15 @@ export class Tool extends Item {
     }
 
     /**
+     * The break rate of the tool
+     * 
+     * @returns tool's break rate
+     */
+    public getBreakRate(): number {
+        return this.breakRate;
+    }
+
+    /**
      * Check if the tool broke
      * 
      * @returns true if the tool is broken otherwise false
