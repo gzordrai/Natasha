@@ -4,7 +4,7 @@ import { JSONTool } from "../JSON";
 export class Tool extends Item {
     private breakRate: number;
 
-    public constructor(name: string, price: number, breakRate: number, copy?: number) {
+    public constructor(name: string, price: number, breakRate: number, copy: number = 0) {
         super(name, price, copy);
         this.breakRate = breakRate;
     }
@@ -24,9 +24,11 @@ export class Tool extends Item {
      * @returns true if the tool is broken otherwise false
      */
     public isBreaked(): boolean {
-        const rand: number = Math.floor(Math.random() * (100 - 0) + 0);
+        const min: number = 0;
+        const max: number = 100;
+        const rand: number = Math.floor(Math.random() * (max - min + 1) + min);
 
-        if (this.breakRate <= rand)
+        if (rand <= this.breakRate)
             return true;
         return false;
     }
