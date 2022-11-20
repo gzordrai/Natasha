@@ -46,6 +46,15 @@ export abstract class Item {
     }
 
     /**
+     * Set a number of copies
+     * 
+     * @param x number of copies
+     */
+    public setCopies(x: number): void {
+        this.copy = x;
+    }
+
+    /**
      * The data of the class intended to be stored in a .json
      * 
      * @returns class data
