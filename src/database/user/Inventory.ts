@@ -19,11 +19,11 @@ export class Inventory {
     public addCollectable(collectable: Collectable): void {
         if (this.collectables.has(collectable.getName())) {
             const oldCollectable: Collectable = this.collectables.get(collectable.getName())!;
-            const newCollectable: Collectable = new Collectable(collectable.getName(), collectable.getPrice(), collectable.getCopies() + oldCollectable.getCopies());
 
-            this.collectables.set(collectable.getName(), newCollectable);
-        } else
-            this.collectables.set(collectable.getName(), collectable);
+            collectable.setCopies(collectable.getCopies() + oldCollectable.getCopies());
+        }
+
+        this.collectables.set(collectable.getName(), collectable);
     }
 
     /**
@@ -34,11 +34,11 @@ export class Inventory {
     public addTool(tool: Tool): void {
         if (this.tools.has(tool.getName())) {
             const oldTool: Tool = this.tools.get(tool.getName())!;
-            const newTool: Tool = new Tool(tool.getName(), tool.getPrice(), tool.getBreakRate(), tool.getCopies() + oldTool.getCopies());
 
-            this.tools.set(tool.getName(), newTool);
-        } else
-            this.tools.set(tool.getName(), tool);
+            tool.setCopies(tool.getCopies() + oldTool.getCopies())
+        }
+
+        this.tools.set(tool.getName(), tool);
     }
 
     /**
