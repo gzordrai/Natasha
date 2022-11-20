@@ -1,5 +1,5 @@
 import { Collection } from "discord.js";
-import { Collectable, Item, Tool } from "../items";
+import { Collectable, Tool } from "../items";
 import { JSONCollectable, JSONInventory, JSONTool } from "../JSON";
 
 export class Inventory {
@@ -55,7 +55,7 @@ export class Inventory {
      * 
      * @returns user's tools
      */
-    public getTools(): Collection<string, Item> {
+    public getTools(): Collection<string, Tool> {
         return this.tools;
     }
 
