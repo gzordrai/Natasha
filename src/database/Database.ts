@@ -6,8 +6,8 @@ import { Balance, Cooldown, Inventory, User } from "./user";
 import { JSONUser } from "./JSON";
 
 export class Database {
-    private static readonly items: JsonDB  = new JsonDB(new Config(path.resolve(__dirname, "../../data/items.json"), true, true, '/'));
-    private static readonly users: JsonDB  = new JsonDB(new Config(path.resolve(__dirname, "../../data/users.json"), true, true, '/'));
+    private static readonly items: JsonDB = new JsonDB(new Config(path.resolve(__dirname, "../../data/items.json"), true, true, '/'));
+    private static readonly users: JsonDB = new JsonDB(new Config(path.resolve(__dirname, "../../data/users.json"), true, true, '/'));
 
     /**
      * Add a user to the database
@@ -39,7 +39,7 @@ export class Database {
         const keys: Array<string> = Object.keys(data);
         let tools: Array<Tool> = new Array<Tool>();
 
-        for(let i = 0; i < keys.length; i++) {
+        for (let i = 0; i < keys.length; i++) {
             const tool: any = data[keys[i]];
 
             tools.push(new Tool(tool.name, tool.price, tool.breakRate));
@@ -58,13 +58,13 @@ export class Database {
         const ids: Array<string> = Object.keys(data);
         let users: Array<User> = new Array<User>();
 
-        for(const id of ids)
+        for (const id of ids)
             users.push(await Database.getUser(id));
 
         users.sort((a: User, b: User): number => {
-            if(a.balance.get() > b.balance.get())
+            if (a.balance.get() > b.balance.get())
                 return -1;
-            if(a.balance.get() < b.balance.get())
+            if (a.balance.get() < b.balance.get())
                 return 1;
             return 0;
         });
@@ -85,13 +85,13 @@ export class Database {
         const cooldowns: Collection<string, Cooldown> = new Collection<string, Cooldown>();
         const inventory: Inventory = new Inventory();
 
-        for(const name of cooldownsName)
+        for (const name of cooldownsName)
             cooldowns.set(name, new Cooldown(name, data.cooldowns[name]!));
 
-        for(const collectable of data.inventory.collectables)
+        for (const collectable of data.inventory.collectables)
             inventory.addCollectable(new Collectable(collectable.name, collectable.price, collectable.copy));
 
-        for(const tool of data.inventory.tools)
+        for (const tool of data.inventory.tools)
             inventory.addTool(new Tool(tool.name, tool.price, tool.breakRate, tool.copy));
 
         return new User(id, balance, cooldowns, inventory);
