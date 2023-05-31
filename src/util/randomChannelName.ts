@@ -15,7 +15,7 @@ interface ChannelRate {
 export const channelNames: ChannelRate = {
     legendary: ["La chambre de Natasha", "La camionette blanche"],
     epic: ["La cave de Simon", "La kouizine de Gilles", "Le grenier de Thibault", "Le trône de Maxime", "La cabane de Djibril", "La piscine à balles d'Alexis", "Le jardin de la grand-mère"],
-    rare: ["Black mesa", "Aperture laboratory", "La faille de l'invocateur", "Les backrooms", "L'antre des soupeurs", "La tour", "Abyss bar", "Personoid Quarters"],
+    rare: ["Black mesa", "Aperture laboratory", "La faille de l'invocateur", "Les backrooms", "L'antre des soupeurs", "La tour", "Abyss bar", "Personoid Quarters", "QG des midgets", "QG des biggers"],
     commun: ["Vocal qui pu"]
 }
 
