@@ -1,8 +1,8 @@
 export enum Rarety {
     Legendary = 1,
-    Epic = 10,
-    Rare = 39,
-    Commun = 50
+    Epic = 14,
+    Rare = 25,
+    Commun = 60
 }
 
 interface ChannelRate {
